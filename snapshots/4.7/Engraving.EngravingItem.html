@@ -1,0 +1,2878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: EngravingItem</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: EngravingItem</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="Engraving.html">Engraving</a>.</span>EngravingItem</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="Engraving.ScoreElement.html">Engraving.ScoreElement</a></li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id=".addToSkyline"><span class="type-signature">(static, readonly) </span>addToSkyline<span class="type-signature"> :Boolean</span></h4>
+
+
+
+
+<div class="description">
+    <p>Whether this element is accounted for in layout calculations.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>4.6</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".articulationAnchor"><span class="type-signature">(static) </span>articulationAnchor<span class="type-signature"> :Number</span></h4>
+
+
+
+
+<div class="description">
+    <p>Articulation anchor</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".bbox"><span class="type-signature">(static, readonly) </span>bbox<span class="type-signature"> :Rect</span></h4>
+
+
+
+
+<div class="description">
+    <p>Bounding box of this element.</p>
+<p>This value is in spatium units for compatibility with other EngravingItem positioning properties.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Rect</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".canvasPos"><span class="type-signature">(static, readonly) </span>canvasPos<span class="type-signature"> :Point</span></h4>
+
+
+
+
+<div class="description">
+    <p>Position of this element relative to the canvas (user interface), in spatium units.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Point</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>4.6</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".color"><span class="type-signature">(static) </span>color<span class="type-signature"> :Color</span></h4>
+
+
+
+
+<div class="description">
+    <p>Item color</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Color</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://doc.qt.io/qt-5/qml-color.html">https://doc.qt.io/qt-5/qml-color.html</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".direction"><span class="type-signature">(static) </span>direction<span class="type-signature"> :<a href="Engraving.html#.Direction">Engraving.Direction</a></span></h4>
+
+
+
+
+<div class="description">
+    <p>The direction of this element,</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="Engraving.html#.Direction">Engraving.Direction</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".effectiveStaffIdx"><span class="type-signature">(static, readonly) </span>effectiveStaffIdx<span class="type-signature"> :Number</span></h4>
+
+
+
+
+<div class="description">
+    <p>Effective staff index for this element. Used by system objects,
+as they may not always appear at their staffIdx</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>4.6</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".enabled"><span class="type-signature">(static, readonly) </span>enabled<span class="type-signature"> :Boolean</span></h4>
+
+
+
+
+<div class="description">
+    <p>The enabled element flag.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>4.6</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".generated"><span class="type-signature">(static, readonly) </span>generated<span class="type-signature"> :Boolean</span></h4>
+
+
+
+
+<div class="description">
+    <p>Indicates that the element is generated.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".headGroup"><span class="type-signature">(static) </span>headGroup<span class="type-signature"> :<a href="Engraving.html#.NoteHeadGroup">Engraving.NoteHeadGroup</a></span></h4>
+
+
+
+
+<div class="description">
+    <p>Group of note head</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="Engraving.html#.NoteHeadGroup">Engraving.NoteHeadGroup</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".headType"><span class="type-signature">(static) </span>headType<span class="type-signature"> :<a href="Engraving.html#.NoteHeadType">Engraving.NoteHeadType</a></span></h4>
+
+
+
+
+<div class="description">
+    <p>Type of note head</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="Engraving.html#.NoteHeadType">Engraving.NoteHeadType</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".header"><span class="type-signature">(static, readonly) </span>header<span class="type-signature"> :Boolean</span></h4>
+
+
+
+
+<div class="description">
+    <p>The header element flag.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>4.6</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".hideStavesWhenIndividuallyEmpty"><span class="type-signature">(static) </span>hideStavesWhenIndividuallyEmpty<span class="type-signature"> :Boolean</span></h4>
+
+
+
+
+<div class="description">
+    <p>For parts: Whether to only hide staves on a system if the entire instrument is empty.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>4.6</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".hideWhenEmpty"><span class="type-signature">(static) </span>hideWhenEmpty<span class="type-signature"> :<a href="Engraving.html#.AutoOnOff">Engraving.AutoOnOff</a></span></h4>
+
+
+
+
+<div class="description">
+    <p>For staves and parts: Whether to hide systems when they are empty.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="Engraving.html#.AutoOnOff">Engraving.AutoOnOff</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>4.6</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".horizontalDirection"><span class="type-signature">(static) </span>horizontalDirection<span class="type-signature"> :<a href="Engraving.html#.DirectionH">Engraving.DirectionH</a></span></h4>
+
+
+
+
+<div class="description">
+    <p>For parentheses: The horizontal direction.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="Engraving.html#.DirectionH">Engraving.DirectionH</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>4.6</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".isMovable"><span class="type-signature">(static, readonly) </span>isMovable<span class="type-signature"> :Boolean</span></h4>
+
+
+
+
+<div class="description">
+    <p>The isMovable element flag.
+Controls whether this element can be dragged by the mouse.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>4.6</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".keysig_mode"><span class="type-signature">(static) </span>keysig_mode<span class="type-signature"> :<a href="Engraving.html#.KeyMode">Engraving.KeyMode</a></span></h4>
+
+
+
+
+<div class="description">
+    <p>For key signatures: The key signature mode.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="Engraving.html#.KeyMode">Engraving.KeyMode</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>4.6</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".lineType"><span class="type-signature">(static) </span>lineType<span class="type-signature"> :<a href="Engraving.html#.SlurStyleType">Engraving.SlurStyleType</a></span></h4>
+
+
+
+
+<div class="description">
+    <p>For slurs &amp; ties: The line style of the slur <code>tie</code>.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="Engraving.html#.SlurStyleType">Engraving.SlurStyleType</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".offsetX"><span class="type-signature">(static) </span>offsetX<span class="type-signature"> :Number</span></h4>
+
+
+
+
+<div class="description">
+    <p>X-axis offset from a reference position in spatium units.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>Engraving.EngravingItem.offset</li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".offsetY"><span class="type-signature">(static) </span>offsetY<span class="type-signature"> :Number</span></h4>
+
+
+
+
+<div class="description">
+    <p>Y-axis offset from a reference position in spatium units.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>Engraving.EngravingItem.offset</li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".pagePos"><span class="type-signature">(static, readonly) </span>pagePos<span class="type-signature"> :Point</span></h4>
+
+
+
+
+<div class="description">
+    <p>Position of this element in page coordinates, in spatium units.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Point</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".parent"><span class="type-signature">(static, readonly) </span>parent<span class="type-signature"> :<a href="Engraving.EngravingItem.html">Engraving.EngravingItem</a></span></h4>
+
+
+
+
+<div class="description">
+    <p>Parent item for this item.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="Engraving.EngravingItem.html">Engraving.EngravingItem</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".pos"><span class="type-signature">(static, readonly) </span>pos<span class="type-signature"> :Point</span></h4>
+
+
+
+
+<div class="description">
+    <p>Reference position of this element relative to its parent element, in spatium units.
+Use <code>pos.x</code> or <code>pos.y</code> to access the X and Y components of this point.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Point</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>4.6</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>Engraving.EngravingItem::posX</li>
+        
+            <li>Engraving.EngravingItem::posY</li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".posX"><span class="type-signature">(static, readonly) </span>posX<span class="type-signature"> :Number</span></h4>
+
+
+
+
+<div class="description">
+    <p>Reference position of this element relative to its parent element.</p>
+<p>This is an offset from the parent object that is determined by the
+autoplace feature. It includes any other offsets applied to the
+element. You can use this value to accurately position other elements
+related to the same parent.</p>
+<p>This value is in spatium units for compatibility with EngravingItem.offsetX.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".posY"><span class="type-signature">(static, readonly) </span>posY<span class="type-signature"> :Number</span></h4>
+
+
+
+
+<div class="description">
+    <p>Reference position of this element relative to its parent element.</p>
+<p>This is an offset from the parent object that is determined by the
+autoplace feature. It includes any other offsets applied to the
+element. You can use this value to accurately position other elements
+related to the same parent.</p>
+<p>This value is in spatium units for compatibility with EngravingItem.offsetY.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".selected"><span class="type-signature">(static, readonly) </span>selected<span class="type-signature"> :Boolean</span></h4>
+
+
+
+
+<div class="description">
+    <p>Indicates that the element is selected.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".showCourtesy"><span class="type-signature">(static) </span>showCourtesy<span class="type-signature"> :Boolean</span></h4>
+
+
+
+
+<div class="description">
+    <p>For clefs, key signatures, time signatures and system breaks:
+Whether to generate courtesy objects.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".slurDirection"><span class="type-signature">(static) </span>slurDirection<span class="type-signature"> :<a href="Engraving.html#.Direction">Engraving.Direction</a></span></h4>
+
+
+
+
+<div class="description">
+    <p>For chords, stems, beams and two-chord tremolos: The slur direction.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="Engraving.html#.Direction">Engraving.Direction</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".small"><span class="type-signature">(static) </span>small<span class="type-signature"> :Boolean</span></h4>
+
+
+
+
+<div class="description">
+    <p>Whether this element is cue size.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".staff"><span class="type-signature">(static, readonly) </span>staff<span class="type-signature"> :Engraving.Staff</span></h4>
+
+
+
+
+<div class="description">
+    <p>Staff which this item belongs to.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Engraving.Staff</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".staffIdx"><span class="type-signature">(static, readonly) </span>staffIdx<span class="type-signature"> :Number</span></h4>
+
+
+
+
+<div class="description">
+    <p>Staff index for this element.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>4.6</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".stemDirection"><span class="type-signature">(static) </span>stemDirection<span class="type-signature"> :<a href="Engraving.html#.Direction">Engraving.Direction</a></span></h4>
+
+
+
+
+<div class="description">
+    <p>For chords, stems, beams and two-chord tremolos: The stem direction.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="Engraving.html#.Direction">Engraving.Direction</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".subType"><span class="type-signature">(static) </span>subType<span class="type-signature"> :Number</span></h4>
+
+
+
+
+<div class="description">
+    <p>Unlike the name might suggest, this property no longer returns the subtype and is scarcely used.
+Named 'subtype' prior to MuseScore 4.6</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".subtype"><span class="type-signature">(static, readonly) </span>subtype<span class="type-signature"> :Number</span></h4>
+
+
+
+
+<div class="description">
+    <p>Subtype of this element.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>4.6</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".trailer"><span class="type-signature">(static, readonly) </span>trailer<span class="type-signature"> :Boolean</span></h4>
+
+
+
+
+<div class="description">
+    <p>The trailer element flag.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>4.6</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".up"><span class="type-signature">(static, readonly) </span>up<span class="type-signature"> :Boolean</span></h4>
+
+
+
+
+<div class="description">
+    <p>If the element points upwards.
+Valid for: Chords, stems, beams, ties, slurs,
+guitar bends, tuplets, tremolos, articulations</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>4.6</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".vStaffIdx"><span class="type-signature">(static, readonly) </span>vStaffIdx<span class="type-signature"> :Number</span></h4>
+
+
+
+
+<div class="description">
+    <p>Staff index for this element, accounting for cross-staffing.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>4.6</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".visible"><span class="type-signature">(static) </span>visible<span class="type-signature"> :Boolean</span></h4>
+
+
+
+
+<div class="description">
+    <p>Indicates that the element is visible.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".z"><span class="type-signature">(static) </span>z<span class="type-signature"> :Number</span></h4>
+
+
+
+
+<div class="description">
+    <p>Stacking order of this element</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="Engraving.html">Engraving</a></li><li><a href="Interactive.html">Interactive</a></li><li><a href="Log.html">Log</a></li><li><a href="Qml.html">Qml</a></li><li><a href="Theme.html">Theme</a></li></ul><h3>Classes</h3><ul><li><a href="Engraving.EngravingItem.html">EngravingItem</a></li><li><a href="Engraving.Score.html">Score</a></li><li><a href="Engraving.ScoreElement.html">ScoreElement</a></li><li><a href="Engraving.Spanner.html">Spanner</a></li><li><a href="Engraving.Style.html">Style</a></li><li><a href="Qml.FlatButton.html">FlatButton</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-1_getting_started.html">Quick start</a></li><li><a href="tutorial-2_manifest.html">Manifest</a></li><li><a href="tutorial-3_form.html">Form</a></li><li><a href="tutorial-4_macros.html">Macros</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ButtonCode">ButtonCode</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Mon Dec 22 2025 14:50:43 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
