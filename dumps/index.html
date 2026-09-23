@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Minidump Relay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --ground: #f6f7f9;
+    --surface: #ffffff;
+    --surface-sunk: #eef0f4;
+    --ink: #161a21;
+    --muted: #5c6371;
+    --line: #dde1e8;
+    --accent: #2f5fd0;
+    --accent-ink: #ffffff;
+    --ok: #17703f;
+    --ok-bg: #e7f3ec;
+    --err: #ad2318;
+    --err-bg: #fbeae8;
+
+    --sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #111419;
+      --surface: #191d24;
+      --surface-sunk: #14181e;
+      --ink: #e5e8ee;
+      --muted: #949cab;
+      --line: #2a303a;
+      --accent: #7ba0f5;
+      --accent-ink: #10141a;
+      --ok: #5cc98d;
+      --ok-bg: #16281f;
+      --err: #f2837a;
+      --err-bg: #2c1a18;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #111419;
+    --surface: #191d24;
+    --surface-sunk: #14181e;
+    --ink: #e5e8ee;
+    --muted: #949cab;
+    --line: #2a303a;
+    --accent: #7ba0f5;
+    --accent-ink: #10141a;
+    --ok: #5cc98d;
+    --ok-bg: #16281f;
+    --err: #f2837a;
+    --err-bg: #2c1a18;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 620px;
+    margin: 0 auto;
+    padding-inline: 20px;
+    padding-block: 48px 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  header { display: flex; flex-direction: column; gap: 6px; }
+
+  h1 {
+    margin: 0;
+    font-size: 25px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  .lede { margin: 0; color: var(--muted); max-width: 58ch; }
+
+  /* --- drop zone --- */
+
+  #drop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 148px;
+    padding: 24px 20px;
+    text-align: center;
+    background: var(--surface);
+    border: 1.5px dashed var(--line);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color .12s, background .12s;
+  }
+  #drop:hover, #drop:focus-visible { border-color: var(--accent); }
+  #drop.over { border-color: var(--accent); background: var(--surface-sunk); }
+  #drop.has-file { border-style: solid; }
+
+  .drop-title { font-weight: 500; }
+  .drop-sub { color: var(--muted); font-size: 13.5px; }
+  .file-name {
+    font-family: var(--mono);
+    font-size: 13.5px;
+    word-break: break-all;
+    max-width: 100%;
+  }
+
+  /* --- settings --- */
+
+  .fields {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 460px) { .fields { grid-template-columns: 1fr; } }
+
+  .field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .field.span { grid-column: 1 / -1; }
+
+  label {
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  input, select {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 9px 10px;
+    width: 100%;
+    min-width: 0;
+  }
+  select { font-family: var(--sans); }
+  input:focus-visible, select:focus-visible, button:focus-visible, #drop:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .hint { font-size: 12.5px; color: var(--muted); }
+
+  /* --- action --- */
+
+  button {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--accent-ink);
+    background: var(--accent);
+    border: none;
+    border-radius: 7px;
+    padding: 11px 18px;
+    cursor: pointer;
+    align-self: flex-start;
+  }
+  button:disabled { opacity: .45; cursor: default; }
+
+  .action { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .toggle {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--muted);
+    font-size: 13.5px;
+    cursor: pointer;
+  }
+  .toggle input { width: auto; accent-color: var(--accent); margin: 0; }
+
+  /* --- result --- */
+
+  .result {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    word-break: break-all;
+  }
+  .result.ok { border-color: var(--ok); background: var(--ok-bg); }
+  .result.err { border-color: var(--err); background: var(--err-bg); }
+
+  .result-label {
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .result.ok .result-label { color: var(--ok); }
+  .result.err .result-label { color: var(--err); }
+
+  .result a, code { font-family: var(--mono); font-size: 13.5px; }
+  .result a { color: var(--accent); }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  footer p { margin: 0 0 8px; }
+  footer p:last-child { margin-bottom: 0; }
+  footer code { color: var(--ink); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+<style>
+  :root {
+    color-scheme: light dark;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  body { margin: 0; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Minidump Relay</h1>
+    <p class="lede">
+      Send a Crashpad <code>.dmp</code> to Sentry and get the event back.
+      Everything happens in the browser; the DSN key is stored on this device only.
+    </p>
+  </header>
+
+  <div id="drop" tabindex="0" role="button" aria-describedby="drop-sub">
+    <span class="drop-title" id="drop-title">Drop a .dmp file here</span>
+    <span class="drop-sub" id="drop-sub">or click to choose &middot; typically in logs/dumps/completed</span>
+  </div>
+  <input type="file" id="file" accept=".dmp" hidden>
+
+  <div class="fields">
+    <div class="field">
+      <label for="project">Project</label>
+      <select id="project">
+        <option value="3">mu4-sandbox</option>
+        <option value="4">mu4</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="server">Server</label>
+      <input id="server" type="url" spellcheck="false" value="https://sentry.musescore.com">
+    </div>
+
+    <div class="field span">
+      <label for="key">DSN key</label>
+      <input id="key" type="text" spellcheck="false" autocomplete="off"
+             placeholder="the sentry_key the app posts with">
+      <span class="hint">Remembered on this device. Same key the shipped build uses &mdash; not an auth token.</span>
+    </div>
+  </div>
+
+  <div class="action">
+    <button id="send" disabled>Send dump</button>
+    <label class="toggle" for="autoopen">
+      <input type="checkbox" id="autoopen" checked>
+      Open the event once it is accepted
+    </label>
+  </div>
+
+  <div class="result" id="result" hidden>
+    <span class="result-label" id="result-label"></span>
+    <span id="result-body"></span>
+  </div>
+
+  <footer>
+    <p>The stack is only readable if debug files for that exact build are in Sentry &mdash; stable builds upload them, nightlies do not.</p>
+    <p>To check which build a dump came from: <code>lldb --core dump.dmp</code>, then <code>image list mscore</code>.</p>
+  </footer>
+</div>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  const drop = $("drop"), fileInput = $("file"), sendBtn = $("send");
+  const projectEl = $("project"), serverEl = $("server"), keyEl = $("key");
+  const result = $("result"), resultLabel = $("result-label"), resultBody = $("result-body");
+
+  let file = null;
+
+  // Remembered settings — private to this browser, and optional.
+  const store = {
+    get(k, fallback) {
+      try { return localStorage.getItem("relay." + k) ?? fallback; }
+      catch { return fallback; }
+    },
+    set(k, v) {
+      try { localStorage.setItem("relay." + k, v); } catch { /* private window */ }
+    }
+  };
+
+  const autoOpenEl = $("autoopen");
+
+  keyEl.value = store.get("key", "");
+  serverEl.value = store.get("server", "https://sentry.musescore.com");
+  projectEl.value = store.get("project", "3");
+
+  keyEl.addEventListener("input", () => store.set("key", keyEl.value.trim()));
+  serverEl.addEventListener("input", () => store.set("server", serverEl.value.trim()));
+  projectEl.addEventListener("change", () => store.set("project", projectEl.value));
+
+  autoOpenEl.checked = store.get("autoopen", "1") === "1";
+  autoOpenEl.addEventListener("change", () => store.set("autoopen", autoOpenEl.checked ? "1" : "0"));
+
+  // File selection
+
+  function setFile(f) {
+    file = f || null;
+    drop.classList.toggle("has-file", !!file);
+    if (file) {
+      const kb = Math.max(1, Math.round(file.size / 1024));
+      $("drop-title").textContent = file.name;
+      $("drop-title").className = "file-name";
+      $("drop-sub").textContent = kb.toLocaleString() + " KB · click to choose another";
+    } else {
+      $("drop-title").textContent = "Drop a .dmp file here";
+      $("drop-title").className = "drop-title";
+      $("drop-sub").textContent = "or click to choose · typically in logs/dumps/completed";
+    }
+    sendBtn.disabled = !file;
+  }
+
+  drop.addEventListener("click", () => fileInput.click());
+  drop.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); fileInput.click(); }
+  });
+  fileInput.addEventListener("change", () => setFile(fileInput.files[0]));
+
+  ["dragenter", "dragover"].forEach((t) =>
+    drop.addEventListener(t, (e) => { e.preventDefault(); drop.classList.add("over"); }));
+  ["dragleave", "drop"].forEach((t) =>
+    drop.addEventListener(t, () => drop.classList.remove("over")));
+  drop.addEventListener("drop", (e) => {
+    e.preventDefault();
+    setFile(e.dataTransfer.files[0]);
+  });
+
+  // Upload
+
+  function show(kind, label, node) {
+    result.hidden = false;
+    result.className = "result " + kind;
+    resultLabel.textContent = label;
+    resultBody.replaceChildren(node);
+  }
+
+  const PROCESSING_WAIT = 2; // seconds Sentry needs before the event shows up
+
+  function openWaitingTab() {
+    const tab = window.open("", "_blank");
+    if (!tab) return null;
+    tab.document.write(
+      '<!doctype html><meta charset="utf-8"><title>Waiting for Sentry</title>' +
+      '<style>' +
+      ':root{color-scheme:light dark;--bg:#f6f7f9;--fg:#5c6371;--track:#dde1e8;--bar:#2f5fd0}' +
+      '@media(prefers-color-scheme:dark){:root{--bg:#111419;--fg:#949cab;--track:#2a303a;--bar:#7ba0f5}}' +
+      'body{margin:0;height:100vh;display:grid;place-content:center;justify-items:center;gap:18px;' +
+      'background:var(--bg);color:var(--fg);' +
+      'font:15px/1.5 ui-sans-serif,system-ui,-apple-system,sans-serif}' +
+      '#track{width:min(260px,70vw);height:4px;border-radius:2px;background:var(--track);overflow:hidden}' +
+      '#bar{display:block;height:100%;width:0;border-radius:2px;background:var(--bar)}' +
+      '</style>' +
+      '<p>Sentry is processing the dump\u2026</p><div id="track"><span id="bar"></span></div>'
+    );
+    tab.document.close();
+    return tab;
+  }
+
+  function followWhenReady(tab, url) {
+    if (tab.closed) return;
+    const bar = tab.document.getElementById("bar");
+    if (bar) {
+      bar.style.transition = `width ${PROCESSING_WAIT}s linear`;
+      // let the initial width paint before starting the transition
+      tab.requestAnimationFrame(() => { bar.style.width = "100%"; });
+    }
+    setTimeout(() => { if (!tab.closed) tab.location.replace(url); }, PROCESSING_WAIT * 1000);
+  }
+
+  sendBtn.addEventListener("click", async () => {
+    const key = keyEl.value.trim();
+    const base = serverEl.value.trim().replace(/\/+$/, "");
+    const project = projectEl.value.trim();
+
+    if (!key) { show("err", "No key", document.createTextNode("Enter the DSN key the build posts with.")); keyEl.focus(); return; }
+    if (!base) { show("err", "No server", document.createTextNode("Enter the Sentry server URL.")); serverEl.focus(); return; }
+
+    sendBtn.disabled = true;
+    sendBtn.textContent = "Sending…";
+    show("", "Sending", document.createTextNode(file.name));
+
+    // Sentry accepts the dump right away but processes it in the background, so
+    // the event is not searchable for a few seconds. Open the tab now, while the
+    // click still counts as a user gesture, and hold it on a waiting screen.
+    const tab = autoOpenEl.checked ? openWaitingTab() : null;
+
+    try {
+      const body = new FormData();
+      body.append("upload_file_minidump", file, file.name);
+
+      const res = await fetch(`${base}/api/${encodeURIComponent(project)}/minidump/?sentry_key=${encodeURIComponent(key)}`, {
+        method: "POST",
+        body
+      });
+
+      const text = (await res.text()).trim();
+
+      if (!res.ok) {
+        if (tab) tab.close();
+        show("err", `Rejected · HTTP ${res.status}`, document.createTextNode(text || res.statusText));
+        return;
+      }
+
+      const eventId = text.replace(/[^0-9a-fA-F]/g, "");
+      if (eventId.length !== 32) {
+        if (tab) tab.close();
+        show("err", "Unexpected response", document.createTextNode(text || "(empty)"));
+        return;
+      }
+
+      // The issues stream filters by the projects selected in the sidebar and by
+      // a short date window, so pin both or a freshly sent event finds nothing.
+      const url = `${base}/organizations/sentry/issues/?query=${eventId}`
+                + `&project=${encodeURIComponent(project)}&statsPeriod=90d`;
+      const link = document.createElement("a");
+      link.href = url;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = url;
+      show("ok", "Accepted · event " + eventId.slice(0, 8), link);
+
+      if (tab) {
+        followWhenReady(tab, url);
+      } else if (autoOpenEl.checked) {
+        resultLabel.textContent += " · popup blocked, use the link";
+      }
+    } catch (e) {
+      if (tab) tab.close();
+      show("err", "Request failed", document.createTextNode(
+        (e && e.message ? e.message + " — " : "") + "check the server URL and that it is reachable from here."
+      ));
+    } finally {
+      sendBtn.disabled = !file;
+      sendBtn.textContent = "Send dump";
+    }
+  });
+</script>
+</body>
+</html>
