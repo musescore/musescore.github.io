@@ -133,6 +133,8 @@
   .field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
   .field.span { grid-column: 1 / -1; }
 
+  .label-row { display: flex; align-items: center; gap: 6px; position: relative; }
+
   label {
     font-size: 11.5px;
     font-weight: 500;
@@ -141,7 +143,54 @@
     color: var(--muted);
   }
 
-  input, select {
+  /* --- field hints --- */
+
+  .info {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--muted);
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    cursor: help;
+    flex: none;
+  }
+  .info:hover, .info:focus { color: var(--accent); border-color: var(--accent); }
+
+  .tip {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    z-index: 5;
+    width: max-content;
+    max-width: min(300px, calc(100vw - 48px));
+    font-family: var(--sans);
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    padding: 8px 10px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .tip code { font-size: 12px; background: var(--surface-sunk); border-radius: 4px; padding: 0 3px; }
+  .info:not(:hover):not(:focus) + .tip { display: none; }
+  @media (prefers-reduced-motion: no-preference) {
+    .tip { animation: tip-in 90ms ease-out; }
+  }
+  @keyframes tip-in { from { opacity: 0; } to { opacity: 1; } }
+
+  input {
     font-family: var(--mono);
     font-size: 14px;
     color: var(--ink);
@@ -152,8 +201,7 @@
     width: 100%;
     min-width: 0;
   }
-  select { font-family: var(--sans); }
-  input:focus-visible, select:focus-visible, button:focus-visible, #drop:focus-visible {
+  input:focus-visible, button:focus-visible, #drop:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
   }
@@ -256,23 +304,49 @@
 
   <div class="fields">
     <div class="field">
-      <label for="project">Project</label>
-      <select id="project">
-        <option value="3">mu4-sandbox</option>
-        <option value="4">mu4</option>
-      </select>
+      <div class="label-row">
+        <label for="project">Project</label>
+        <button type="button" class="info"
+                aria-label="Project id: the number Sentry gives the project, found in the DSN path and in Project Settings, Client Keys">!</button>
+        <span class="tip" id="tip-project" role="tooltip">
+          The number Sentry gives the project, not its name. It is the id in the DSN path
+          &mdash; <code>&hellip;/api/<b>4</b>/minidump/</code> &mdash; and in
+          <b>Project Settings &rarr; Client Keys (DSN)</b>.
+        </span>
+      </div>
+      <input id="project" type="text" spellcheck="false" autocomplete="off"
+             inputmode="numeric" placeholder="id">
     </div>
 
     <div class="field">
-      <label for="server">Server</label>
-      <input id="server" type="url" spellcheck="false" value="https://sentry.musescore.com">
+      <div class="label-row">
+        <label for="server">Server</label>
+        <button type="button" class="info"
+                aria-label="Server: scheme and host of the crash-report URL the build reports to, without the path">!</button>
+        <span class="tip" id="tip-server" role="tooltip">
+          The Sentry instance the build reports to: scheme and host of its crash-report URL,
+          without the path &mdash; everything before <code>/api/</code>.
+        </span>
+      </div>
+      <input id="server" type="url" spellcheck="false" autocomplete="off"
+             placeholder="https://sentry.example.com">
     </div>
 
     <div class="field span">
-      <label for="key">DSN key</label>
+      <div class="label-row">
+        <label for="key">DSN key</label>
+        <button type="button" class="info"
+                aria-label="DSN key: the sentry_key from the crash-report URL the build was built with, or Project Settings, Client Keys">!</button>
+        <span class="tip" id="tip-key" role="tooltip">
+          The <code>sentry_key</code> from the crash-report URL the build was built with, or
+          <b>Project Settings &rarr; Client Keys (DSN)</b> &mdash; the public part of the DSN.
+          A dump is only accepted by the project this key belongs to.
+        </span>
+      </div>
       <input id="key" type="text" spellcheck="false" autocomplete="off"
              placeholder="the sentry_key the app posts with">
-      <span class="hint">Remembered on this device. Same key the shipped build uses &mdash; not an auth token.</span>
+      <span class="hint">Server, project id and key are remembered on this device. The key is the same
+        <code>sentry_key</code> the shipped build posts with &mdash; not an auth token.</span>
     </div>
   </div>
 
@@ -291,7 +365,7 @@
 
   <footer>
     <p>The stack is only readable if debug files for that exact build are in Sentry &mdash; stable builds upload them, nightlies do not.</p>
-    <p>To check which build a dump came from: <code>lldb --core dump.dmp</code>, then <code>image list mscore</code>.</p>
+    <p>To check which build a dump came from: <code>lldb --core dump.dmp</code>, then <code>image list &lt;app binary&gt;</code>.</p>
   </footer>
 </div>
 
@@ -317,12 +391,12 @@
   const autoOpenEl = $("autoopen");
 
   keyEl.value = store.get("key", "");
-  serverEl.value = store.get("server", "https://sentry.musescore.com");
-  projectEl.value = store.get("project", "3");
+  serverEl.value = store.get("server", "");
+  projectEl.value = store.get("project", "");
 
   keyEl.addEventListener("input", () => store.set("key", keyEl.value.trim()));
   serverEl.addEventListener("input", () => store.set("server", serverEl.value.trim()));
-  projectEl.addEventListener("change", () => store.set("project", projectEl.value));
+  projectEl.addEventListener("input", () => store.set("project", projectEl.value.trim()));
 
   autoOpenEl.checked = store.get("autoopen", "1") === "1";
   autoOpenEl.addEventListener("change", () => store.set("autoopen", autoOpenEl.checked ? "1" : "0"));
@@ -409,6 +483,7 @@
 
     if (!key) { show("err", "No key", document.createTextNode("Enter the DSN key the build posts with.")); keyEl.focus(); return; }
     if (!base) { show("err", "No server", document.createTextNode("Enter the Sentry server URL.")); serverEl.focus(); return; }
+    if (!project) { show("err", "No project", document.createTextNode("Enter the Sentry project id.")); projectEl.focus(); return; }
 
     sendBtn.disabled = true;
     sendBtn.textContent = "Sending…";
